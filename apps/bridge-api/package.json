@@ -1,0 +1,36 @@
+{
+	"name": "bridge-api",
+	"version": "1.0.0",
+	"main": "index.js",
+	"exports": {
+		".": {
+			"types": "./amplify/backend.ts",
+			"import": "./amplify/backend.ts"
+		},
+		"./schema": {
+			"types": "./amplify/data/resource.ts",
+			"default": "./amplify/data/resource.ts"
+		}
+	},
+	"scripts": {
+		"sandbox:start": "npx @dotenvx/dotenvx run --env-file=.env -- npx ampx sandbox --profile admin-amplify-oops-1 --stream-function-logs --outputs-out-dir ../",
+		"sandbox:delete": "npx ampx sandbox delete --profile admin-amplify-oops-1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"@aws-amplify/backend": "^1.16.1",
+		"@aws-amplify/backend-cli": "^1.8.0",
+		"@aws-sdk/client-amplify": "^3.624.0",
+		"aws-cdk-lib": "^2.189.1",
+		"constructs": "^10.4.2",
+		"esbuild": "^0.25.5",
+		"tsx": "^4.20.3",
+		"typescript": "^5.8.3"
+	},
+	"dependencies": {
+		"aws-amplify": "^6.15.1"
+	}
+}
