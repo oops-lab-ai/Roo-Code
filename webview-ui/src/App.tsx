@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from "react"
 import { useEvent } from "react-use"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Authenticator } from '@aws-amplify/ui-react'
 
 import { ExtensionMessage } from "@roo/ExtensionMessage"
 import TranslationProvider from "./i18n/TranslationContext"
@@ -22,6 +23,11 @@ import { AccountView } from "./components/account/AccountView"
 import { useAddNonInteractiveClickListener } from "./components/ui/hooks/useNonInteractiveClick"
 import { TooltipProvider } from "./components/ui/tooltip"
 import { STANDARD_TOOLTIP_DELAY } from "./components/ui/standard-tooltip"
+import amplifyconfig from './amplify_outputs.json'
+import { Amplify } from 'aws-amplify'
+
+Amplify.configure(amplifyconfig)
+
 
 type Tab = "settings" | "history" | "mcp" | "modes" | "chat" | "marketplace" | "account"
 
@@ -214,15 +220,17 @@ const App = () => {
 const queryClient = new QueryClient()
 
 const AppWithProviders = () => (
-	<ExtensionStateContextProvider>
-		<TranslationProvider>
-			<QueryClientProvider client={queryClient}>
-				<TooltipProvider delayDuration={STANDARD_TOOLTIP_DELAY}>
-					<App />
-				</TooltipProvider>
-			</QueryClientProvider>
-		</TranslationProvider>
-	</ExtensionStateContextProvider>
+      <Authenticator.Provider>
+        <ExtensionStateContextProvider>
+          <TranslationProvider>
+            <QueryClientProvider client={queryClient}>
+                <TooltipProvider delayDuration={STANDARD_TOOLTIP_DELAY}>
+                  <App />
+                </TooltipProvider>
+            </QueryClientProvider>
+          </TranslationProvider>
+        </ExtensionStateContextProvider>
+      </Authenticator.Provider>
 )
 
 export default AppWithProviders

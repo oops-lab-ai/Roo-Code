@@ -22,6 +22,7 @@ import {
 	Globe,
 	Info,
 	MessageSquare,
+	Smartphone,
 	LucideIcon,
 } from "lucide-react"
 
@@ -63,6 +64,7 @@ import { TerminalSettings } from "./TerminalSettings"
 import { ExperimentalSettings } from "./ExperimentalSettings"
 import { LanguageSettings } from "./LanguageSettings"
 import { About } from "./About"
+import { MobileAuth } from "./MobileAuth"
 import { Section } from "./Section"
 import PromptsSettings from "./PromptsSettings"
 import { cn } from "@/lib/utils"
@@ -89,6 +91,7 @@ const sectionNames = [
 	"prompts",
 	"experimental",
 	"language",
+	"mobileAuth",
 	"about",
 ] as const
 
@@ -400,6 +403,7 @@ const SettingsView = forwardRef<SettingsViewRef, SettingsViewProps>(({ onDone, t
 			{ id: "prompts", icon: MessageSquare },
 			{ id: "experimental", icon: FlaskConical },
 			{ id: "language", icon: Globe },
+			{ id: "mobileAuth", icon: Smartphone },
 			{ id: "about", icon: Info },
 		],
 		[], // No dependencies needed now
@@ -692,6 +696,11 @@ const SettingsView = forwardRef<SettingsViewRef, SettingsViewProps>(({ onDone, t
 					{/* Language Section */}
 					{activeTab === "language" && (
 						<LanguageSettings language={language || "en"} setCachedStateField={setCachedStateField} />
+					)}
+
+					{/* Mobile Auth Section */}
+					{activeTab === "mobileAuth" && (
+						<MobileAuth />
 					)}
 
 					{/* About Section */}
